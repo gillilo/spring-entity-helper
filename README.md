@@ -1,38 +1,39 @@
-# create-svelte
+# Spring Boot 클래스 생성기
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+이 프로젝트는 SQL CREATE 문을 입력받아 Spring Boot 애플리케이션을 위한 JPA Entity, Repository, Service, Controller 클래스를 자동으로 생성합니다.
 
-## Creating a project
+## 사용 방법
 
-If you're seeing this, you've probably already done this step. Congrats!
+1. SQL CREATE 문을 입력합니다.
+2. 패키지 이름을 입력합니다.
+3. 생성 버튼을 클릭합니다.
+4. 생성된 코드를 확인하고 복사하여 사용합니다.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## 생성되는 클래스
 
-# create a new project in my-app
-npm create svelte@latest my-app
+- Entity: JPA 엔티티 클래스
+- Repository: Spring Data JPA 리포지토리 인터페이스
+- Service: 비즈니스 로직을 처리하는 서비스 클래스
+- Controller: REST API 엔드포인트를 제공하는 컨트롤러 클래스
+
+## 주의사항
+
+- 생성된 코드는 기본적인 구조를 제공하는 템플릿입니다. 실제 프로젝트에 적용할 때는 필요에 따라 수정이 필요할 수 있습니다.
+- 복잡한 관계나 특수한 데이터 타입은 수동으로 처리해야 할 수 있습니다.
+- 생성된 코드를 사용하기 전에 반드시 검토하고 테스트해야 합니다.
+
+## 예시
+```sql
+CREATE TABLE user (
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(255) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	first_name VARCHAR(255) NOT NULL,
+	last_name VARCHAR(255) NOT NULL,
+	phone_number VARCHAR(20),
+	address VARCHAR(255),
+	enabled BOOLEAN NOT NULL DEFAULT TRUE,
+	role VARCHAR(50)
+);
 ```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
